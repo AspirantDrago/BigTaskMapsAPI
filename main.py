@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel
 from PyQt6.QtGui import QPixmap, QImage, QKeyEvent, QGuiApplication
 
+from src.toponym import Toponym
 from src.utils import get_image
 from src.map_config import Map
 
@@ -20,6 +21,7 @@ class MapWindow(QWidget, Ui_Form):
         self.show_map()
         self.btnLightTheme.clicked.connect(self.set_light_theme)
         self.btnDarkTheme.clicked.connect(self.set_dark_theme)
+        self.btnSearch.clicked.connect(self.find_toponym)
 
     def show_map(self):
         if not self.map_config.updated:
@@ -51,13 +53,22 @@ class MapWindow(QWidget, Ui_Form):
                 self.show_map()
 
     def set_light_theme(self) -> None:
+        self.image.setFocus()
         QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Light)
         self.map_config.set_light_theme()
         self.show_map()
 
     def set_dark_theme(self) -> None:
+        self.image.setFocus()
         QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Dark)
         self.map_config.set_dark_theme()
+        self.show_map()
+
+    def find_toponym(self):
+        self.image.setFocus()
+        text = self.textSearch.text().strip()
+        toponym = Toponym.from_search_text(text)
+        self.map_config.set_toponym(toponym)
         self.show_map()
 
 

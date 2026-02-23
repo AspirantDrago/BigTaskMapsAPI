@@ -14,5 +14,10 @@ def get_image(map_config: Map) -> BytesIO:
         'spn': f'{map_config.scale},{map_config.scale}',
         'theme': 'dark' if map_config.dark_theme else 'light',
     }
+    if map_config._toponym is not None:
+        params['pt'] = '{},{},comma'.format(
+            map_config._toponym.longitude,
+            map_config._toponym.latitude,
+        )
     data = requests.get(URL, params=params).content
     return BytesIO(data)

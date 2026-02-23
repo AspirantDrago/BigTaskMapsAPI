@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(829, 472)
+        Form.resize(829, 512)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.widget = QtWidgets.QWidget(parent=Form)
@@ -46,6 +46,12 @@ class Ui_Form(object):
         self.image.setText("")
         self.image.setObjectName("image")
         self.gridLayout.addWidget(self.image, 0, 0, 1, 1)
+        self.textSearch = QtWidgets.QLineEdit(parent=Form)
+        self.textSearch.setObjectName("textSearch")
+        self.gridLayout.addWidget(self.textSearch, 1, 0, 1, 1)
+        self.btnSearch = QtWidgets.QPushButton(parent=Form)
+        self.btnSearch.setObjectName("btnSearch")
+        self.gridLayout.addWidget(self.btnSearch, 1, 1, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -56,3 +62,5 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "Тема"))
         self.btnLightTheme.setText(_translate("Form", "Светлая"))
         self.btnDarkTheme.setText(_translate("Form", "Темная"))
+        self.textSearch.setPlaceholderText(_translate("Form", "введите текст для Поиска"))
+        self.btnSearch.setText(_translate("Form", "Поиск"))

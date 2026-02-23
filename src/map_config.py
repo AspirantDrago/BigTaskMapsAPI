@@ -1,4 +1,5 @@
 from src.config import Config
+from src.toponym import Toponym
 
 
 class Map:
@@ -10,6 +11,7 @@ class Map:
         self._latitude: float = latitude
         self._scale: float = scale
         self.updated: bool = True
+        self._toponym: Toponym | None = None
         self._dark_theme: bool = False
 
     @property
@@ -83,3 +85,14 @@ class Map:
         if not self._dark_theme:
             self._dark_theme = True
             self.updated = True
+
+    def set_toponym(self, toponym: Toponym | None) -> None:
+        self._toponym = toponym
+        if toponym is not None:
+            self.longitude = toponym.longitude
+            self.latitude = toponym.latitude
+        self.updated = True
+
+    def clear_toponym(self) -> None:
+        self._toponym = None
+        self.updated = True
