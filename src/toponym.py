@@ -12,6 +12,7 @@ class Toponym:
     longitude: float
     latitude: float
     search_text: str
+    full_address: str
 
     @classmethod
     def from_search_text(cls, search_text: str):
@@ -26,5 +27,7 @@ class Toponym:
         json_data = response.json()['response']
         geo_obj = json_data['GeoObjectCollection']['featureMember'][0]['GeoObject']
         long, lat = map(float, geo_obj['Point']['pos'].split())
+        full_address = geo_obj['metaDataProperty']['GeocoderMetaData']['text']
 
-        return cls(longitude=long, latitude=lat, search_text=search_text)
+        return cls(longitude=long, latitude=lat, search_text=search_text,
+                   full_address=full_address)

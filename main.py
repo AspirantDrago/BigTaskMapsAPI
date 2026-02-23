@@ -70,11 +70,16 @@ class MapWindow(QWidget, Ui_Form):
         text = self.textSearch.text().strip()
         toponym = Toponym.from_search_text(text)
         self.map_config.set_toponym(toponym)
+        if toponym is not None:
+            self.textAddress.setText(toponym.full_address)
+        else:
+            self.textAddress.clear()
         self.show_map()
 
     def reset_search(self):
         self.image.setFocus()
         self.textSearch.clear()
+        self.textAddress.clear()
         self.map_config.clear_toponym()
         self.show_map()
 
