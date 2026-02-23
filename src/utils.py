@@ -11,7 +11,8 @@ def get_image(map_config: Map) -> BytesIO:
     params = {
         'apikey': STATIC_MAPS_API,
         'll': f'{map_config.longitude},{map_config.latitude}',
-        'spn': f'{map_config.scale},{map_config.scale}'
+        'spn': f'{map_config.scale},{map_config.scale}',
+        'theme': 'dark' if map_config.dark_theme else 'light',
     }
     data = requests.get(URL, params=params).content
     return BytesIO(data)

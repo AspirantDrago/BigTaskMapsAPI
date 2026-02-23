@@ -10,6 +10,7 @@ class Map:
         self._latitude: float = latitude
         self._scale: float = scale
         self.updated: bool = True
+        self._dark_theme: bool = False
 
     @property
     def longitude(self) -> float:
@@ -51,6 +52,10 @@ class Map:
         self._scale = scale
         self.updated = True
 
+    @property
+    def dark_theme(self) -> bool:
+        return self._dark_theme
+
     def zome_up(self) -> None:
         self.scale /= Config.SCALE_FACTOR
 
@@ -68,3 +73,13 @@ class Map:
 
     def move_down(self) -> None:
         self.latitude -= self.scale * Config.MOVE_FACTOR
+
+    def set_light_theme(self) -> None:
+        if self._dark_theme:
+            self._dark_theme = False
+            self.updated = True
+
+    def set_dark_theme(self) -> None:
+        if not self._dark_theme:
+            self._dark_theme = True
+            self.updated = True

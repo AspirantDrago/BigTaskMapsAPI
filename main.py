@@ -2,27 +2,24 @@ import sys
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel
-from PyQt6.QtGui import QPixmap, QImage, QKeyEvent
+from PyQt6.QtGui import QPixmap, QImage, QKeyEvent, QGuiApplication
 
 from src.utils import get_image
 from src.map_config import Map
 
+from forms.main import Ui_Form
+
 SCREEN_SIZE = (600, 450)
 
 
-class MapWindow(QWidget):
+class MapWindow(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.setupUi(self)
         self.map_config = Map(37.530887, 55.703118, 0.002)
         self.show_map()
-
-    def initUI(self):
-        self.setGeometry(100, 100, *SCREEN_SIZE)
-        self.setWindowTitle('Map')
-        self.image = QLabel(self)
-        self.image.move(0, 0)
-        self.image.resize(*SCREEN_SIZE)
+        self.btnLightTheme.clicked.connect(self.set_light_theme)
+        self.btnDarkTheme.clicked.connect(self.set_dark_theme)
 
     def show_map(self):
         if not self.map_config.updated:
@@ -53,9 +50,20 @@ class MapWindow(QWidget):
                 self.map_config.move_down()
                 self.show_map()
 
+    def set_light_theme(self) -> None:
+        QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Light)
+        self.map_config.set_light_theme()
+        self.show_map()
+
+    def set_dark_theme(self) -> None:
+        QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Dark)
+        self.map_config.set_dark_theme()
+        self.show_map()
+
 
 def main():
     app = QApplication(sys.argv)
+    QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Light)
     window = MapWindow()
     window.show()
     sys.exit(app.exec())
