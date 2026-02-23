@@ -94,5 +94,6 @@ class Map:
         self.updated = True
 
     def clear_toponym(self) -> None:
-        self._toponym = None
-        self.updated = True
+        if self._toponym is not None:
+            self._toponym = None
+            self.updated = True

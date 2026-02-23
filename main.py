@@ -22,6 +22,7 @@ class MapWindow(QWidget, Ui_Form):
         self.btnLightTheme.clicked.connect(self.set_light_theme)
         self.btnDarkTheme.clicked.connect(self.set_dark_theme)
         self.btnSearch.clicked.connect(self.find_toponym)
+        self.btnResetSearch.clicked.connect(self.reset_search)
 
     def show_map(self):
         if not self.map_config.updated:
@@ -69,6 +70,12 @@ class MapWindow(QWidget, Ui_Form):
         text = self.textSearch.text().strip()
         toponym = Toponym.from_search_text(text)
         self.map_config.set_toponym(toponym)
+        self.show_map()
+
+    def reset_search(self):
+        self.image.setFocus()
+        self.textSearch.clear()
+        self.map_config.clear_toponym()
         self.show_map()
 
 

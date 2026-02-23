@@ -14,7 +14,7 @@
    <string>Map</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
+   <item row="0" column="2">
     <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
@@ -78,6 +78,20 @@
      </layout>
     </widget>
    </item>
+   <item row="1" column="0">
+    <widget class="QLineEdit" name="textSearch">
+     <property name="placeholderText">
+      <string>введите текст для Поиска</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="btnSearch">
+     <property name="text">
+      <string>Поиск</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="image">
      <property name="minimumSize">
@@ -100,17 +114,28 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLineEdit" name="textSearch">
-     <property name="placeholderText">
-      <string>введите текст для Поиска</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="1">
-    <widget class="QPushButton" name="btnSearch">
+    <widget class="QPushButton" name="btnResetSearch">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Поиск</string>
+      <string>x</string>
      </property>
     </widget>
    </item>
