@@ -1,0 +1,7 @@
+[project]
+name = "BigTaskMapAPI"
+authors="AspirantDrago"
+version = "0.1.0"
+description = "Большая задача по Maps API"
+requires-python = ">=3.11"
+dependencies = []
