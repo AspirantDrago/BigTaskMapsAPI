@@ -4,14 +4,16 @@ from PyQt6.QtWidgets import QApplication, QWidget, QLabel
 from PyQt6.QtGui import QPixmap, QImage
 
 from src.utils import get_image
+from src.map_config import Map
 
 SCREEN_SIZE = (600, 450)
 
 
-class Map(QWidget):
+class MapWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.map_config = Map(37.530887, 55.703118, 0.002)
         self.show_map()
 
     def initUI(self):
@@ -22,16 +24,14 @@ class Map(QWidget):
         self.image.resize(*SCREEN_SIZE)
 
     def show_map(self):
-        image = get_image(
-            37.530887, 55.703118, 0.002
-        )
+        image = get_image(self.map_config)
         pixmap = QPixmap(QImage.fromData(image.read()))
         self.image.setPixmap(pixmap)
 
 
 def main():
     app = QApplication(sys.argv)
-    window = Map()
+    window = MapWindow()
     window.show()
     sys.exit(app.exec())
 
